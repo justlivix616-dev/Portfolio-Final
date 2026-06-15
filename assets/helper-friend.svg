@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 800" role="img" aria-label="Helper Friend artwork">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#0f4d3f" />
+      <stop offset="100%" stop-color="#8ef9c2" />
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="800" fill="url(#bg)" />
+  <path d="M300 580 C400 380, 480 320, 620 420 C740 500, 820 520, 900 420" fill="none" stroke="#ffffff" stroke-width="54" stroke-linecap="round" opacity="0.8" />
+  <circle cx="340" cy="320" r="90" fill="#2dd4bf" />
+  <circle cx="860" cy="320" r="90" fill="#f472b6" />
+  <path d="M340 420 L450 560" stroke="#fff" stroke-width="40" stroke-linecap="round" />
+  <path d="M860 420 L750 560" stroke="#fff" stroke-width="40" stroke-linecap="round" />
+</svg>

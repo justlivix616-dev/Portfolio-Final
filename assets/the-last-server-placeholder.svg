@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="600" height="400" viewBox="0 0 600 400" role="img" aria-label="Placeholder image for the last server">
+  <defs>
+    <linearGradient id="bg2" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#f1d7ff" />
+      <stop offset="100%" stop-color="#c088ff" />
+    </linearGradient>
+  </defs>
+  <rect width="600" height="400" fill="url(#bg2)" rx="24" />
+  <rect x="40" y="40" width="520" height="320" fill="rgba(255,255,255,0.55)" rx="20" />
+  <text x="300" y="210" text-anchor="middle" font-family="Inter, Arial, sans-serif" font-size="48" fill="#3b1e5a" font-weight="700">Placeholder</text>
+  <text x="300" y="270" text-anchor="middle" font-family="Inter, Arial, sans-serif" font-size="20" fill="#3b1e5a">the last server</text>
+</svg>

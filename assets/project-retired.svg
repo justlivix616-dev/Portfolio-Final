@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 800" role="img" aria-label="Retired project thumbnail artwork">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#1f2937" />
+      <stop offset="100%" stop-color="#6b7280" />
+    </linearGradient>
+    <filter id="blur">
+      <feGaussianBlur in="SourceGraphic" stdDeviation="3" />
+    </filter>
+  </defs>
+  <rect width="1200" height="800" fill="url(#bg)" />
+  <circle cx="600" cy="410" r="210" fill="#d1d5db" opacity="0.9" />
+  <path d="M520 280 L590 380 L520 480 L680 520 L760 450 L680 380 L760 320 L620 300 Z" fill="#f3f4f6" opacity="0.85" filter="url(#blur)" />
+  <circle cx="490" cy="360" r="28" fill="#6b7280" />
+  <circle cx="700" cy="360" r="28" fill="#6b7280" />
+  <path d="M580 220 L620 240 L660 240 L690 220" stroke="#6b7280" stroke-width="22" fill="none" stroke-linecap="round" />
+</svg>

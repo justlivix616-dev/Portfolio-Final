@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 800" role="img" aria-label="Game project thumbnail artwork">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#18181b" />
+      <stop offset="100%" stop-color="#7c3aed" />
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="800" fill="url(#bg)" />
+  <rect x="190" y="250" width="820" height="300" rx="120" fill="#a855f7" opacity="0.9" />
+  <circle cx="410" cy="400" r="70" fill="#f8fafc" />
+  <circle cx="720" cy="400" r="70" fill="#f8fafc" />
+  <rect x="520" y="320" width="140" height="160" rx="40" fill="#f8fafc" />
+  <circle cx="410" cy="400" r="28" fill="#7c3aed" />
+  <circle cx="720" cy="400" r="28" fill="#7c3aed" />
+  <rect x="565" y="380" width="70" height="20" rx="10" fill="#7c3aed" />
+</svg>
