@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LIVIX'S PORTFOLIO</title>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div id="cursor"></div>
+
+    <nav class="navbar">
+        <div class="navbar-left">
+            <div class="logo">LIVIX</div>
+            <button class="nav-toggle hover-target" aria-label="Toggle navigation" aria-expanded="false">
+                <svg class="icon-menu" viewBox="0 0 24 24" width="28" height="28" aria-hidden="true" focusable="false">
+                    <path class="line top" d="M3 6h18" stroke="currentColor" stroke-width="2" stroke-linecap="round" fill="none"></path>
+                    <path class="line middle" d="M3 12h18" stroke="currentColor" stroke-width="2" stroke-linecap="round" fill="none"></path>
+                    <path class="line bottom" d="M3 18h18" stroke="currentColor" stroke-width="2" stroke-linecap="round" fill="none"></path>
+                </svg>
+            </button>
+        </div>
+        <div class="nav-links">
+            <a href="#projects" class="hover-target">Projects</a>
+            <a href="#extras" class="hover-target">Extras</a>
+            <a href="#featured" class="hover-target">Featured</a>
+        </div>
+        <a href="#contact" class="action-btn hover-target">Contact Me</a>
+    </nav>
+
+    <header class="hero">
+        <div class="hero-content">
+            <h1>BUILDING <br><span class="accent-text">IMPACTFUL</span><br> CHAOS.</h1>
+            <p>Hey, I'm Alikhan. Here, you can check out what I'm working on. I try my best to create games and web tools.</p>
+        </div>
+        <div class="hero-shape shape-1"></div>
+        <div class="hero-shape shape-2"></div>
+    </header>
+
+    <div class="marquee-container">
+        <div class="marquee-content">
+            <span>GAME DEV • VIDEO MAKING • EXPERIMENTAL UI • SOCIAL IMPACT • </span>
+            <span>GAME DEV • VIDEO MAKING • EXPERIMENTAL UI • SOCIAL IMPACT • </span>
+        </div>
+    </div>
+
+    <section id="featured" class="section-container bg-dark">
+        <div class="header-block">
+            <h2>FEATURED WORK</h2>
+            <p>Major releases and tools actively helping users.</p>
+        </div>
+        
+        <div class="horizontal-scroll-wrapper">
+            <a href="https://www.roblox.com/games/95673858998549/The-Last-Server" target="_blank" class="h-card shadow-pop hover-target">
+                <div class="h-card-info">
+                    <h3>GAMES DEVELOPMENT</h3>
+                    <p>Creating immersive and engaging gaming experiences with a focus on storytelling and player interaction.</p>
+                </div>
+            </a>
+            <a href="https://www.tiktok.com/@chayrixis" target="_blank" class="h-card shadow-pop hover-target">
+                <div class="h-card-info">
+                    <h3>CONTENT & CREATIVITY</h3>
+                    <p>Editing, playing random games and writing about my game development and beyond.</p>
+                </div>
+            </a>
+            <a href="#" class="h-card shadow-pop hover-target">
+                <div class="h-card-info">
+                    <h3>WEB DEVELOPMENT</h3>
+                    <p>Specializing in front-end development, I turn static designs into dynamic, responsive websites. I focus on modern workflows, lightning-fast interfaces, and user-centric layouts that tell a story.</p>
+                </div>
+            </a>
+        </div>
+    </section>
+
+    <section id="projects" class="section-container bg-light border-top">
+        <div class="header-block">
+            <h2>MY PROJECTS</h2>
+            <p>I love to create things, and I'm always working on something new!</p>
+            
+            <div class="filter-controls">
+                <button class="filter-btn active hover-target" data-filter="all">All</button>
+                <button class="filter-btn hover-target" data-filter="games">In Development</button>
+                <button class="filter-btn hover-target" data-filter="web">Web-sites</button>
+                <button class="filter-btn hover-target" data-filter="retired">Old Projects</button>
+            </div>
+        </div>
+
+        <div class="archive-grid">
+            <a href="https://www.roblox.com/games/95673858998549/The-Last-Server" target="_blank" class="archive-item shadow-pop hover-target" data-category="games">
+                <div class="archive-thumb">
+                    <img src="assets/the-last-server-placeholder.svg" alt="Game project preview">
+                </div>
+                <div class="tag bg-accent">Game</div>
+                <h3>THE LAST SERVER</h3>
+                <p>Psychological Horror Game addressing digital isolation. Complex NPC AI & deep lore.</p>
+            </a>
+            <a href="https://www.roblox.com/games/137078500808373/Helper-Friend" target="_blank" class="archive-item shadow-pop hover-target" data-category="games">
+                <div class="archive-thumb">
+                    <img src="assets/helper-friend-placeholder.svg" alt="Game project preview">
+                </div>
+                <div class="tag bg-accent">Game</div>
+                <h3>HELPER FRIEND</h3>
+                <p>A supportive companion for navigating life's challenges. At least, that's what it looks like at first.</p>
+            </a>
+            
+            <a href="https://justlivix616-dev.github.io/You-want-some-Coffee-/" target="_blank" class="archive-item shadow-pop hover-target" data-category="web">
+                <div class="archive-thumb">
+                    <img src="assets/COFFEE HOUSE.png" alt="Web project preview">
+                </div>
+                <div class="tag" style="background: #60a5fa;">Web</div>
+                <h3>The Coffee House</h3>
+                <p>A simple website for a local coffee shop, showcasing their menu and events.</p>
+            </a>
+
+            <a href="https://justlivix616-dev.github.io/PIZZATIME/" target="_blank" class="archive-item shadow-pop hover-target" data-category="web">
+                <div class="archive-thumb">
+                    <img src="assets/burger.png" alt="Web project preview">
+                </div>
+                <div class="tag" style="background: #60a5fa;">Web</div>
+                <h3>Mr Burger</h3>
+                <p>A modern website for a popular burger chain, featuring their menu and promotional deals.</p>
+            </a>
+
+            <a href="https://justlivix616-dev.github.io/NovaSpace-WS/" target="_blank" class="archive-item shadow-pop hover-target" data-category="web">
+                <div class="archive-thumb">
+                    <img src="assets/NOVASPACE.png" alt="Web project preview">
+                </div>
+                <div class="tag" style="background: #60a5fa;">Web</div>
+                <h3>NOVASPACE</h3>
+                <p>A futuristic website for a space exploration company, showcasing their missions and achievements.</p>
+            </a>
+
+            <a href="https://justlivix616-dev.github.io/CREATOR.OS/" target="_blank" class="archive-item shadow-pop hover-target" data-category="web">
+                <div class="archive-thumb">
+                    <img src="assets/CREATOROS.png" alt="Web project preview">
+                </div>
+                <div class="tag" style="background: #60a5fa;">Web</div>
+                <h3>CREATOR.OS</h3>
+                <p>A personal development blog focusing on web technologies and design principles.</p>
+            </a>
+
+            <a href="https://justlivix616-dev.github.io/Ultimate-Spider-Man/" target="_blank" class="archive-item shadow-pop hover-target" data-category="web">
+                <div class="archive-thumb">
+                    <img src="assets/USM.png" alt="Web project preview">
+                </div>
+                <div class="tag" style="background: #60a5fa;">Web</div>
+                <h3>SPIDEY-HUB</h3>
+                <p>Spider-Man 1610 (Ultimate Spider-Man) Universe.</p>
+            </a>
+
+            <a href="#" class="archive-item shadow-pop hover-target" data-category="web">
+                <div class="archive-thumb">
+                    <img src="assets/PIZZA TIME.png" alt="Web project preview">
+                </div>
+                <div class="tag" style="background: #60a5fa;">Web</div>
+                <h3>PIZZA TIME PIZZERIA</h3>
+                <p>A modern website for a popular pizza chain, featuring their menu and promotional deals.</p>
+            </a>
+
+            <a href="https://www.roblox.com/games/95920350677090/Forgotten-Issues" target="_blank" class="archive-item shadow-pop hover-target" data-category="retired">
+                <div class="archive-thumb">
+                    <img src="assets/Forgotten Issues.png" alt="Retired project preview">
+                </div>
+                <div class="tag" style="background: #9ca3af;">Old Projects</div>
+                <h3>FORGOTTEN ISSUES</h3>
+                <p>A game with a virus that slowly corrupts the world. But the player prevented its spread. Well, he could've.</p>
+            </a>
+        </div>
+    </section>
+
+    <section id="extras" class="section-container bg-accent border-top">
+        <div class="header-block">
+            <h2>EXTRAS</h2>
+            <p>Things for fun.</p>
+        </div>
+
+        <div class="extras-list">
+            <a href="https://www.tiktok.com/@chayrixis" target="_blank" class="extra-row shadow-pop hover-target">
+                <div class="row-left">
+                    <h3>🎬 Tik Tok Channel</h3>
+                    <p>My editing, gameplay, and dev logs</p>
+                </div>
+                <div class="row-right">➔</div>
+            </a>
+            <a href="https://www.youtube.com/@chayrixis" class="extra-row shadow-pop hover-target">
+                <div class="row-left">
+                    <h3>🎬 YouTube Channel</h3>
+                    <p>Making random videos</p>
+                </div>
+                <div class="row-right">➔</div>
+            </a>
+            <a href="https://discord.com/users/chayrixis" target="_blank" class="extra-row shadow-pop hover-target">
+                <div class="row-left">
+                    <h3>📒 My Discord Username</h3>
+                    <p>It's Chayrixis</p>
+                </div>
+                <div class="row-right">➔</div>
+            </a>
+        </div>
+    </section> 
+
+     <!-- 
+    <section id="media" class="section-container bg-dark border-top">
+        <div class="header-block">
+            <h2>MEDIA</h2>
+            <p></p>
+        </div>
+
+        <div class="media-grid">
+            <a href="#" class="media-card shadow-pop hover-target">
+                <div class="tag" style="background: #fbbf24;">Feature</div>
+                <h3>Solo Leveling</h3>
+                <p>On making web accessibility tools more affordable for indie devs.</p>
+            </a>
+            <a href="#" class="media-card shadow-pop hover-target">
+                <div class="tag" style="background: #fbbf24;">Award</div>
+                <h3>Spider-Man</h3>
+                <p>Recognition for work on the Consumer Transparency Tracker.</p>
+            </a>
+            <a href="#" class="media-card shadow-pop hover-target">
+                <div class="tag" style="background: #fbbf24;">Interview</div>
+                <h3>Editing</h3>
+                <p>Discussing mental health themes inside 'The Last Server'.</p>
+            </a>
+        </div>
+    </section> -->
+
+    <footer id="contact" class="footer-block bg-light border-top">
+        <h2>SUPPORT MY WORK.</h2>
+        <p>Available for contract jobs, or just a chat.</p>
+        <p>I am also available on Discord as "chayrixis"</p>
+        <a href="mailto:your@email.com" class="action-btn large-btn shadow-pop hover-target">SEND MESSAGE</a>
+        <p class="copyright">© 2026 LIVIX. All Rights Reserved.</p>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
