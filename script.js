@@ -21,23 +21,41 @@ const filterBtns = document.querySelectorAll('.filter-btn');
 const archiveItems = document.querySelectorAll('.archive-item');
 
 filterBtns.forEach(btn => {
-    btn.addEventListener('click', () => {
+    btn.addEventListener('click', (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        // reuse the same logic as pointerup
+        const filterValue = btn.getAttribute('data-filter');
         filterBtns.forEach(b => b.classList.remove('active'));
         btn.classList.add('active');
-
-        const filterValue = btn.getAttribute('data-filter');
-
         archiveItems.forEach(item => {
             if (filterValue === 'all' || item.getAttribute('data-category') === filterValue) {
                 item.classList.remove('hide');
                 item.style.animation = 'none';
-                item.offsetHeight; 
-                item.style.animation = null; 
+                item.offsetHeight;
+                item.style.animation = null;
             } else {
                 item.classList.add('hide');
             }
         });
     });
+
+    // Support touch/pointer devices where click may be unreliable
+    btn.addEventListener('pointerup', (e) => {
+        if (e.button && e.button !== 0) return; // only primary
+        e.preventDefault();
+        e.stopPropagation();
+        const filterValue = btn.getAttribute('data-filter');
+        filterBtns.forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        archiveItems.forEach(item => {
+            if (filterValue === 'all' || item.getAttribute('data-category') === filterValue) {
+                item.classList.remove('hide');
+            } else {
+                item.classList.add('hide');
+            }
+        });
+    }, { passive: false });
 });
 
 // 3. Smooth Navigation Scrolling
@@ -55,24 +73,53 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
 
 // 4. Navbar Parallax / Floating Sticky Effect
 const navbar = document.querySelector('.navbar');
-window.addEventListener('scroll', () => {
-    if (!navbar) return;
-    const scrollY = window.scrollY;
-    const translateY = Math.min(scrollY * 0.04, 10);
-    const scale = Math.max(0.99, 1 - Math.min(scrollY, 120) * 0.0004);
-    navbar.style.transform = `translate3d(0, ${translateY}px, 0) scale(${scale})`;
-    navbar.classList.toggle('sticky-active', scrollY > 10);
-});
+if (navbar) {
+    let ticking = false;
+    
+    const onScroll = () => {
+        if (!ticking) {
+            window.requestAnimationFrame(() => {
+                const scrollY = window.scrollY || document.documentElement.scrollTop;
+                const isMobile = window.innerWidth <= 768;
+                
+                // More pronounced parallax on mobile for visibility
+                let translateY, scale;
+                if (isMobile) {
+                    // Mobile: more noticeable movement
+                    translateY = Math.min(scrollY * 0.08, 20);
+                    scale = Math.max(0.95, 1 - Math.min(scrollY, 150) * 0.0008);
+                } else {
+                    // Desktop: subtle effect
+                    translateY = Math.min(scrollY * 0.04, 10);
+                    scale = Math.max(0.99, 1 - Math.min(scrollY, 120) * 0.0004);
+                }
+                
+                navbar.style.setProperty('--nav-translate', `${translateY}px`);
+                navbar.style.setProperty('--nav-scale', `${scale}`);
+                navbar.classList.toggle('sticky-active', scrollY > 10);
+                ticking = false;
+            });
+            ticking = true;
+        }
+    };
+    
+    // Use passive listener for smooth scroll performance
+    window.addEventListener('scroll', onScroll, { passive: true });
+}
 
 // 5. Hamburger Menu Toggle
 const navToggle = document.querySelector('.nav-toggle');
 const navLinks = document.querySelector('.nav-links');
 
 if (navToggle && navLinks) {
-    navToggle.addEventListener('click', () => {
+    // Ensure the toggle button does not submit forms and stops propagation
+    navToggle.setAttribute('type', 'button');
+    navToggle.addEventListener('click', (e) => {
+        e.preventDefault();
+        e.stopPropagation();
         const isOpen = navLinks.classList.toggle('open');
         navToggle.classList.toggle('open', isOpen);
-        navToggle.setAttribute('aria-expanded', isOpen);
+        navToggle.setAttribute('aria-expanded', String(isOpen));
     });
 }
 
