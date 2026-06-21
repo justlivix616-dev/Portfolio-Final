@@ -12,8 +12,22 @@
 h1, h2, h3 { 
     font-weight: 900; 
     text-transform: uppercase; 
-    overflow-wrap: break-word; /* Prevents long words from breaking containers */
-    hyphens: auto; /* Optional: adds a hyphen if a word must break */
+    overflow-wrap: break-word; /* Wrap only at word boundaries where needed */
+    word-break: normal;
+    hyphens: none; /* Prevent hyphenation */
+}
+
+/* Keep words whole while allowing wrapping inside cards and text blocks */
+body, button, a, p, span, label, li, input, textarea, .header-block h2, .nav-links a, .filter-btn, .action-btn, .extra-row, .row-left, .archive-item, .h-card-info {
+    overflow-wrap: break-word;
+    word-break: normal;
+    hyphens: none;
+}
+
+/* Prevent long uppercase headings from breaking inside words */
+.header-block h2, .header-block h2 span, .header-block h2 strong {
+    word-break: keep-all;
+    overflow-wrap: break-word;
 }
 
 /* Ensure the card info container keeps text in bounds */
@@ -27,7 +41,7 @@ h1, h2, h3 {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: 'Space Grotesk', sans-serif;
+    font-family: 'Sora', sans-serif;
 }
 
 body {
@@ -68,17 +82,6 @@ h1, h2, h3 { font-weight: 900; text-transform: uppercase; }
     box-shadow: 12px 12px 0px var(--border-color);
 }
 
-/* Custom Cursor */
-#cursor {
-    position: fixed; top: 0; left: 0; width: 20px; height: 20px;
-    background-color: var(--bg-accent); border: 2px solid var(--border-color);
-    border-radius: 50%; pointer-events: none; z-index: 9999;
-    transform: translate(-50%, -50%); transition: width 0.2s, height 0.2s, background-color 0.2s;
-    mix-blend-mode: difference;
-}
-#cursor.hovered { width: 60px; height: 60px; background-color: #fff; }
-@media (pointer: coarse) { * { cursor: auto; } #cursor { display: none; } }
-
 /* Navbar */
 .navbar {
     position: sticky;
@@ -92,9 +95,8 @@ h1, h2, h3 { font-weight: 900; text-transform: uppercase; }
     z-index: 10;
     /* Use CSS vars for transform so JS can update without conflicting with class rules */
     --nav-translate: 0px;
-    --nav-scale: 1;
-    transform: translate3d(0, var(--nav-translate), 0) scale(var(--nav-scale));
-    transition: transform 0.25s ease, box-shadow 0.25s ease, background 0.25s ease;
+    transform: translate3d(0, var(--nav-translate), 0) scale(var(--nav-scale, 1));
+    transition: transform 0.32s cubic-bezier(.2,.9,.3,1), box-shadow 0.25s ease, background 0.25s ease, padding 0.28s ease;
 }
 .navbar.sticky-active {
     /* Avoid setting transform here to prevent conflict with JS-driven nav transforms */
@@ -158,9 +160,19 @@ h1, h2, h3 { font-weight: 900; text-transform: uppercase; }
     background-color: #fde047; color: var(--text-dark); padding: 0.8rem 2rem;
     text-decoration: none; font-weight: 900;
     border: var(--border-weight) solid var(--border-color); box-shadow: 4px 4px 0px var(--border-color);
-    transition: all 0.2s;
+    border-radius: 16px;
+    transition: opacity 0.32s ease, transform 0.32s ease, box-shadow 0.2s;
+    will-change: opacity, transform;
 }
 .action-btn:hover { transform: translate(-2px, -2px); box-shadow: 6px 6px 0px var(--border-color); }
+
+/* Smooth hide/show when user scrolls */
+.action-btn.hidden-by-scroll {
+    opacity: 0;
+    transform: translateY(-10px) scale(0.98);
+    pointer-events: none;
+    box-shadow: none;
+}
 
 /* Hero & Marquee */
 .hero { position: relative; padding: 10rem 5%; overflow: hidden; }
@@ -183,25 +195,25 @@ h1, h2, h3 { font-weight: 900; text-transform: uppercase; }
 .horizontal-scroll-wrapper::-webkit-scrollbar { height: 12px; }
 .horizontal-scroll-wrapper::-webkit-scrollbar-thumb { background: var(--bg-accent); border: 2px solid var(--border-color); }
 
-.h-card { min-width: 600px; background: var(--bg-light); color: var(--text-dark); scroll-snap-align: center; text-decoration: none; display: flex; flex-direction: column; }
+.h-card { min-width: 600px; background: var(--bg-light); color: var(--text-dark); scroll-snap-align: center; text-decoration: none; display: flex; flex-direction: column; border-radius: 16px; transition: transform 0.2s ease, box-shadow 0.2s ease; }
 .h-card-img { height: 350px; width: 100%; border-bottom: var(--border-weight) solid var(--border-color); overflow: hidden; }
 .h-card-img img { width: 100%; height: 100%; object-fit: cover; display: block; }
 .h-card-info { padding: 2rem; }
 .h-card-info h3 { font-size: 2.5rem; margin-bottom: 1rem; }
 .h-card-info p { font-size: 1.2rem; font-weight: 700; }
 
-.archive-thumb { width: 100%; height: 220px; overflow: hidden; border: var(--border-weight) solid var(--border-color); margin-bottom: 1.5rem; }
+.archive-thumb { width: 100%; height: 220px; overflow: hidden; border: var(--border-weight) solid var(--border-color); margin-bottom: 1.5rem; border-radius: 16px; }
 .archive-thumb img { width: 100%; height: 100%; object-fit: cover; display: block; }
 
 /* Filter Grid (My Projects) */
-.filter-controls { margin-top: 2rem; display: flex; gap: 1rem; flex-wrap: wrap; }
-.filter-btn { padding: 0.8rem 2rem; font-size: 1.2rem; font-weight: 900; background: transparent; border: var(--border-weight) solid var(--border-color); transition: background 0.2s, color 0.2s; }
+.filter-controls { margin-top: 2rem; display: flex; gap: 1rem; flex-wrap: wrap;}
+.filter-btn { padding: 0.8rem 2rem; font-size: 1.2rem; font-weight: 900; background: transparent; border: var(--border-weight) solid var(--border-color); transition: background 0.2s, color 0.2s; border-radius: 16px;}
 .filter-btn:hover, .filter-btn.active { background: var(--text-dark); color: var(--bg-light); }
 
 .archive-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(350px, 1fr)); gap: 2rem; margin-top: 3rem; }
-.archive-item { background: #fff; padding: 2rem; color: var(--text-dark); text-decoration: none; display: block; }
-.archive-item:hover { text-decoration: none; }
-.archive-item.hide { display: none; }
+.archive-item { background: #fff; padding: 2rem; color: var(--text-dark); text-decoration: none; display: block; border-radius: 16px;}
+.archive-item:hover { text-decoration: none; border-radius: 16px;}
+.archive-item.hide { display: none; border-radius: 16px;}
 .archive-item h3 { font-size: 1.8rem; margin: 1rem 0; }
 .archive-item p { font-weight: 700; }
 .tag { display: inline-block; padding: 0.3rem 0.8rem; border: 2px solid var(--border-color); font-weight: 900; color: var(--text-dark); margin-bottom: 0.5rem;}
@@ -211,18 +223,12 @@ h1, h2, h3 { font-weight: 900; text-transform: uppercase; }
 .extra-row { 
     display: flex; justify-content: space-between; align-items: center; 
     padding: 2.5rem; background: var(--bg-light); color: var(--text-dark); 
-    text-decoration: none; border-radius: 8px;
+    text-decoration: none; border-radius: 16px;
 }
 .row-left h3 { font-size: 2rem; margin-bottom: 0.5rem; }
 .row-left p { font-size: 1.2rem; font-weight: 700; opacity: 0.8; }
 .row-right { font-size: 3rem; font-weight: 900; transition: transform 0.2s; }
 .extra-row:hover .row-right { transform: translateX(10px); color: var(--bg-accent); }
-
-/* Media Grid */
-.media-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; }
-.media-card { background: var(--bg-light); color: var(--text-dark); padding: 3rem 2rem; text-decoration: none; text-align: center; }
-.media-card h3 { font-size: 2rem; margin: 1rem 0; }
-.media-card p { font-size: 1.1rem; font-weight: 700; }
 
 /* Footer */
 .footer-block { text-align: center; padding: 4rem 5%; }
@@ -239,11 +245,15 @@ h1, h2, h3 { font-weight: 900; text-transform: uppercase; }
     .nav-links a { margin: 0 1rem; font-size: 1.1rem; }
     .horizontal-scroll-wrapper { gap: 2rem; }
 /* Very small phones: comfortable full-screen menu and larger touch targets */
-    .h-card { min-width: 55vw; }
+    .h-card { min-width: 65vw; }
     .archive-grid { grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); }
 }
 
 @media (max-width: 900px) {
+    .horizontal-scroll-wrapper { padding: 1rem 0 2rem 0; }
+    .h-card { min-width: 90vw; max-width: 90vw; }
+    .h-card-info h3 { font-size: 2.2rem; }
+    .h-card-info p { font-size: 1.15rem; }
     .navbar {
         padding: 1rem 3% 0.8rem;
         top: 0.8rem;
@@ -316,7 +326,7 @@ h1, h2, h3 { font-weight: 900; text-transform: uppercase; }
     .hero p { font-size: 1.4rem; }
     .hero-shape { display: none; }
     .horizontal-scroll-wrapper { gap: 1.5rem; padding-bottom: 2rem; }
-    .h-card { min-width: 82vw; }
+    .h-card { min-width: 90vw; }
     .archive-grid { gap: 1.5rem; }
     .archive-item { padding: 1.6rem; }
     .filter-btn { padding: 0.8rem 1.4rem; font-size: 1rem; }
@@ -348,6 +358,38 @@ h1, h2, h3 { font-weight: 900; text-transform: uppercase; }
     .h-card-info { padding: 1.25rem; }
     .filter-btn { padding: 0.6rem 1rem; font-size: 0.98rem; }
     .action-btn { padding: 0.7rem 1rem; }
+}
+
+/* Compact navbar when contact button is hidden on small screens */
+@media (max-width: 900px) {
+    .navbar.compact {
+        padding: 0.6rem 3%;
+        top: 0.6rem;
+        border-radius: 18px;
+    }
+    .navbar.compact .logo {
+        transform: scale(0.96);
+    }
+    .navbar.compact .nav-links a {
+        font-size: 1rem;
+        padding: 0.55rem 0.9rem;
+    }
+    .navbar.compact .action-btn {
+        display: none !important;
+    }
+}
+
+@media (max-width: 768px) {
+    .navbar.compact {
+        padding: 0.5rem 3%;
+        top: 0.5rem;
+        border-radius: 14px;
+    }
+    .navbar.compact .logo { transform: scale(0.94); }
+
+/* Smooth transitions for inner navbar elements */
+.logo { transition: transform 0.32s cubic-bezier(.2,.9,.3,1); }
+.nav-links a { transition: font-size 0.22s ease, padding 0.22s ease; }
 }
 
 
