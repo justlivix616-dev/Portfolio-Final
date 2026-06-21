@@ -75,6 +75,8 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
 const navbar = document.querySelector('.navbar');
 if (navbar) {
     let ticking = false;
+    let lastScrollY = window.scrollY || document.documentElement.scrollTop;
+    const contactBtn = document.querySelector('.navbar .action-btn') || document.querySelector('.action-btn');
     
     const onScroll = () => {
         if (!ticking) {
@@ -93,10 +95,32 @@ if (navbar) {
                     translateY = Math.min(scrollY * 0.04, 10);
                     scale = Math.max(0.99, 1 - Math.min(scrollY, 120) * 0.0004);
                 }
+
+                // Toggle contact button visibility based on scroll direction
+                if (contactBtn) {
+                    const HIDE_DELTA = 10;    // min px scrolled down to trigger hide
+                    const HIDE_SCROLL_Y = 80; // only hide after this scrollY
+                    const delta = scrollY - lastScrollY;
+
+                    // Hide on notable downward scroll past threshold
+                    if (delta > HIDE_DELTA && scrollY > HIDE_SCROLL_Y) {
+                        if (!contactBtn.classList.contains('hidden-by-scroll')) {
+                            contactBtn.classList.add('hidden-by-scroll');
+                            contactBtn.setAttribute('aria-hidden', 'true');
+                            if (window.innerWidth <= 900) navbar.classList.add('compact');
+                        }
+                    } else if (contactBtn.classList.contains('hidden-by-scroll') && scrollY <= HIDE_SCROLL_Y) {
+                        // Only show again when the page is back near the top
+                        contactBtn.classList.remove('hidden-by-scroll');
+                        contactBtn.setAttribute('aria-hidden', 'false');
+                        navbar.classList.remove('compact');
+                    }
+                }
                 
                 navbar.style.setProperty('--nav-translate', `${translateY}px`);
                 navbar.style.setProperty('--nav-scale', `${scale}`);
                 navbar.classList.toggle('sticky-active', scrollY > 10);
+                lastScrollY = scrollY;
                 ticking = false;
             });
             ticking = true;
@@ -156,5 +180,9 @@ window.addEventListener('resize', () => {
         navLinks.classList.remove('open');
         navToggle.classList.remove('open');
         navToggle.setAttribute('aria-expanded', 'false');
+    }
+    // Remove compact navbar state when switching to desktop widths
+    if (window.innerWidth > 900 && navbar.classList.contains('compact')) {
+        navbar.classList.remove('compact');
     }
 });
